@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}View Result{% endblock title %}
+
+
+{% block content %}
+
+<!-- Table for display the results -->
+<table>
+    <thead></thead>
+</table>
+
+
+<!-- Form for manually uploading results for each course -->
+<h2>Upload Results (Manual)</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="files">Add Files:</label>
+        <!-- <input type="password" name="password" id="password" required> -->
+        {% render_field form.file name="file" id="file" type="file" %}
+        {% for error in form.file.errors %}
+        <p class="error-msg">{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <button type="submit">Upload</button>
+</form>
+
+{% endblock content %}
