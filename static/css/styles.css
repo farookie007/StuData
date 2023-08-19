@@ -137,5 +137,6 @@ button:hover {
   .logout {
     bottom: 25px;
     right: 5px;
+    height: fit-content;
   }
 }
