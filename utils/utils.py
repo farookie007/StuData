@@ -40,6 +40,8 @@ def parse_result_html(file) -> Tuple:
     
     # extracting the session id
     # decoding the `file` object which is an io.BytesIO object
+    # with open(file) as fp:
+    #     content = fp.read()
     content = file.getvalue().decode()
     session = re.search('\d\d\d\d/\d\d\d\d', content).group()
 

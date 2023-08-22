@@ -21,6 +21,9 @@ class CustomUser(AbstractUser):
         super().__init__(*args, **kwargs)
         self.matric = self.username     # this ensures that `matric` and `username` fields carry the same value
 
+    def __str__(self):
+        return f"{self.matric} - {self.email}"
+    
     @property
     def matric(self):
         """Return the username (i.e the matric number)"""
@@ -30,9 +33,6 @@ class CustomUser(AbstractUser):
     def matric(self, value):
         """Sets the username to value and saves it to the database to maintain uniformity"""
         self.username = value
-
-    def __str__(self):
-        return f"{self.matric} - {self.email}"
     
     def save(self, *args, **kwargs):
         # to convert all matric number entries to uppercase
