@@ -19,7 +19,3 @@ def register(request):
         return render(request, 'accounts/register.html', {'form': form})
     form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
-
-@login_required
-def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
