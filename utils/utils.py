@@ -7,7 +7,7 @@ from typing import Dict, Tuple
 
 
 
-def get_semester(df):
+def get_semester_code(df):
     """Gets and return the semester of the result as an
     integer from the dataframe."""
     course = df.index[0]
@@ -40,9 +40,9 @@ def parse_result_html(file) -> Tuple:
     
     # extracting the session id
     # decoding the `file` object which is an io.BytesIO object
-    # with open(file) as fp:
-    #     content = fp.read()
-    content = file.getvalue().decode()
+    # content = file.getvalue().decode()
+    with open(file) as fp:
+        content = fp.read()
     session = re.search('\d\d\d\d/\d\d\d\d', content).group()
 
     dfs = pd.read_html(file, header=1, index_col=1)
