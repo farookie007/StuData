@@ -17,7 +17,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Login successful')
-                return redirect(reverse('accounts:dashboard'))
+                return redirect(reverse('dashboard:dashboard'))
             messages.error(request, 'Invalid matric number or password')
         else:
             messages.error(request, 'Invalid form submission')
