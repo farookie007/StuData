@@ -1,5 +1,4 @@
 import re
-import io
 import pandas as pd
 
 from typing import Dict, Tuple
@@ -11,7 +10,7 @@ def get_semester_code(df):
     """Gets and return the semester of the result as an
     integer from the dataframe."""
     course = df.index[0]
-    course_title = df.loc[course]['Title']
+    course_title = df.loc[course]['title']
     if "SWEP" in course_title:
         return 3
     last_dgt = int(course[-1])
@@ -40,9 +39,9 @@ def parse_result_html(file) -> Tuple:
     
     # extracting the session id
     # decoding the `file` object which is an io.BytesIO object
-    # content = file.getvalue().decode()
-    with open(file) as fp:
-        content = fp.read()
+    # with open(file) as fp:
+    #     content = fp.read()
+    content = file.getvalue().decode()
     session = re.search('\d\d\d\d/\d\d\d\d', content).group()
 
     dfs = pd.read_html(file, header=1, index_col=1)
@@ -63,8 +62,8 @@ def calculate_gpa(df: pd.DataFrame) -> float:
         df: pandas.DataFrame object
     returns:
         Returns the GPA as a floating point number."""
-    gradients = df['Gradient']
-    units = df['Unit']
+    gradients = df['gradient']
+    units = df['unit']
     try:
         return sum(gradients) / sum(units)
     except ZeroDivisionError:
