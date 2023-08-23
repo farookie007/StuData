@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'results.apps.ResultsConfig',
     'user_auth.apps.UserAuthConfig',
+    'dashboard.apps.DashboardConfig,'
     # 3rd party Apps
     'django_extensions',    # provides a debugging console on the error page
     'widget_tweaks',
