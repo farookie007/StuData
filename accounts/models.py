@@ -37,4 +37,7 @@ class CustomUser(AbstractUser):
     def save(self, *args, **kwargs):
         # to convert all matric number entries to uppercase
         self.username = self.username.upper()
+        self.first_name = self.first_name.title()
+        self.last_name = self.last_name.title()
+        self.middle_name = self.middle_name.title()
         super().save(*args, **kwargs)
