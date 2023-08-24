@@ -65,7 +65,7 @@ def upload_result_view(request):
                 update_fields=('status', 'ca', 'exam', 'total', 'grade', 'gradient'),
                 unique_fields=('course_id',)
             )
-            return redirect(reverse('accounts:dashboard'))
+            return redirect(reverse('dashboard:dashboard'))
         form = ResultUploadForm(request.POST, request.FILES)
     # otherwise;
     else:
