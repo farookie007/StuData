@@ -5,7 +5,7 @@ from .views import dashboard
 
 
 
-app_name = 'accounts'
+app_name = 'dashboard'
 
 urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
