@@ -19,6 +19,6 @@ def refresh(request):
         result.cgpa = sum(gradients)/ sum(units)
     user.cgpa = result.cgpa
     user.save()
-    Semester_Result.objects.bulk_update(user_results, fields=('cgpa'))
+    Semester_Result.objects.bulk_update(user_results, fields=('cgpa',))
 
     return dashboard(request)
