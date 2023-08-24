@@ -39,9 +39,11 @@ def parse_result_html(file) -> Tuple:
     
     # extracting the session id
     # decoding the `file` object which is an io.BytesIO object
-    # with open(file) as fp:
-    #     content = fp.read()
-    content = file.getvalue().decode()
+    
+    try:
+        content = file.getvalue().decode()
+    except UnicodeDecodeError:
+        content = file.getvalue().decode(encoding='ISO-8859-1')
     session = re.search('\d\d\d\d/\d\d\d\d', content).group()
 
     dfs = pd.read_html(file, header=1, index_col=1)
