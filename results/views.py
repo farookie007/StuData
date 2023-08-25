@@ -32,7 +32,7 @@ def upload_result_view(request):
                     semester_code = get_semester_code(df)
                     result_id = f'{user.matric}:{session_code}/{semester_code}/{level_code}{"E" if fac == "Engineering and Technology" else ""}'    # unique id to differentiate each result
                     semester = Semester.objects.get_or_create(code=semester_code)[0]
-                    result = SemesterResult.objects.get_or_create(
+                    result = SemesterResult.objects.update_or_create(
                         result_id=result_id,
                         level=level,
                         semester=semester,
