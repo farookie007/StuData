@@ -59,13 +59,15 @@ def upload_result_view(request):
                         )
                         course = Course(**kwargs)
                         COURSES_LIST.append(course)
+            # Bulk creating the list of courses uploaded
             Course.objects.bulk_create(
                 COURSES_LIST,
                 batch_size=500,
                 update_conflicts=True,
                 update_fields=('status', 'ca', 'exam', 'total', 'grade', 'gradient'),
-                unique_fields=('course_id',)
+                unique_fields=('course_id',),
             )
+            # Bulk updating the list of each semester's gpa
             SemesterResult.objects.bulk_update(
                 SEMESTERRESULT_LIST,
                 batch_size=500,
