@@ -18,6 +18,7 @@ def upload_result_view(request):
             uploaded_results = form.cleaned_data["file"]
             user = request.user
             COURSES_LIST = list()
+            SEMESTERRESULT_LIST = list()
 
             for file in uploaded_results:
                 dfs, session_code, level_code, fac = parse_result_html(file.file)
@@ -32,14 +33,15 @@ def upload_result_view(request):
                     semester_code = get_semester_code(df)
                     result_id = f'{user.matric}:{session_code}/{semester_code}/{level_code}{"E" if fac == "Engineering and Technology" else ""}'    # unique id to differentiate each result
                     semester = Semester.objects.get_or_create(code=semester_code)[0]
-                    result = SemesterResult.objects.update_or_create(
+                    result = SemesterResult.objects.get_or_create(
                         result_id=result_id,
                         level=level,
                         semester=semester,
                         session=session,
                         owner=user,
-                        gpa=calculate_gpa(clean(df, result_id)),
                     )[0]
+                    result.gpa = calculate_gpa(clean(df, result_id))
+                    SEMESTERRESULT_LIST.append(result)
 
                     for course_code in df.index:
                         location = df.loc[course_code]
@@ -63,6 +65,11 @@ def upload_result_view(request):
                 update_conflicts=True,
                 update_fields=('status', 'ca', 'exam', 'total', 'grade', 'gradient'),
                 unique_fields=('course_id',)
+            )
+            SemesterResult.objects.bulk_update(
+                SEMESTERRESULT_LIST,
+                batch_size=500,
+                fields=('gpa',),
             )
             messages.success(request, "Upload successful")
             return redirect(reverse('dashboard:dashboard'))
