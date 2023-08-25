@@ -43,11 +43,11 @@ class Course(models.Model):
     code = models.CharField(max_length=15)
     title = models.CharField(max_length=150)
     unit = models.IntegerField()
-    status = models.CharField(max_length=1)     # Todo: Add different choices
+    status = models.CharField(max_length=10)     # Todo: Add different choices
     ca = models.FloatField(null=True)
     exam = models.FloatField(null=True)
     total = models.FloatField(null=True)
-    grade = models.CharField(max_length=1)      # Todo: Add different choices
+    grade = models.CharField(max_length=10)      # Todo: Add different choices
     gradient = models.IntegerField()
     
     course_id = models.CharField(max_length=50, unique=True)
