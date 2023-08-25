@@ -25,7 +25,7 @@ class Level(models.Model):
         return f'<Level: {self.code}>'
 
 
-class Semester_Result(models.Model):
+class SemesterResult(models.Model):
     result_id = models.CharField(max_length=30, blank=True, unique=True)
     gpa = models.FloatField(max_length=5, default=0.00)     # stores the gpa of the result
     cgpa = models.FloatField(max_length=5, default=0.00)    # stores the cgpa all previous results
@@ -51,7 +51,7 @@ class Course(models.Model):
     gradient = models.IntegerField()
     
     course_id = models.CharField(max_length=50, unique=True)
-    result = models.ForeignKey(Semester_Result, on_delete=models.CASCADE, related_name='courses')
+    result = models.ForeignKey(SemesterResult, on_delete=models.CASCADE, related_name='courses')
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='courses')
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='courses')
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='courses')

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from results.models import Semester_Result
+from results.models import SemesterResult
 # Create your views here.
 
 
@@ -19,6 +19,6 @@ def refresh(request):
         result.cgpa = sum(gradients)/ sum(units)
     user.cgpa = result.cgpa
     user.save()
-    Semester_Result.objects.bulk_update(user_results, fields=('cgpa',))
+    SemesterResult.objects.bulk_update(user_results, fields=('cgpa',))
 
     return dashboard(request)

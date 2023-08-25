@@ -1,11 +1,10 @@
-import pandas as pd
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 
-from utils.utils import parse_result_html, calculate_gpa, calculate_cgpa, get_semester_code, clean
+from utils.utils import parse_result_html, calculate_gpa, get_semester_code, clean
 from .forms import ResultUploadForm
-from .models import Course, Semester, Session, Semester_Result, Level
+from .models import Course, Semester, Session, SemesterResult, Level
 
 
 
@@ -33,7 +32,7 @@ def upload_result_view(request):
                     semester_code = get_semester_code(df)
                     result_id = f'{user.matric}:{session_code}/{semester_code}/{level_code}{"E" if fac == "Engineering and Technology" else ""}'    # unique id to differentiate each result
                     semester = Semester.objects.get_or_create(code=semester_code)[0]
-                    result = Semester_Result.objects.get_or_create(
+                    result = SemesterResult.objects.get_or_create(
                         result_id=result_id,
                         level=level,
                         semester=semester,
@@ -65,6 +64,7 @@ def upload_result_view(request):
                 update_fields=('status', 'ca', 'exam', 'total', 'grade', 'gradient'),
                 unique_fields=('course_id',)
             )
+            messages.success("Upload successful")
             return redirect(reverse('dashboard:dashboard'))
         form = ResultUploadForm(request.POST, request.FILES)
     # otherwise;
