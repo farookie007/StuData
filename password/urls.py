@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 
 
+app_name = 'password'
 
 urlpatterns = [
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='password/reset_password.html'), name='password_reset'),
