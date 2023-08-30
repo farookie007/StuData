@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700;1,900&family=Quicksand:wght@400;500;600;700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Courgette&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700;1,900&family=Quicksand:wght@400;500;600;700&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 * {
   margin: 0;
@@ -7,8 +7,9 @@
   box-sizing: border-box;
 }
 
+
 html {
-  font-family: "Source Code Pro", Calibri;
+  font-family: "Quicksand", Calibri;
 }
 body {
   font-size: 16px;
@@ -16,8 +17,8 @@ body {
   margin: 10px 0;
 }
 
-button {
-    font-family: "Source Code Pro", Calibri;
+#submit-btn {
+  font-family: "Source Code Pro", Calibri;
 }
 
 .container {
@@ -60,6 +61,12 @@ input {
 .foot a {
   color: #3498db;
 }
+
+#fgt-password {
+  color: #3498db;
+  float: right;
+}
+
 .foot {
   font-size: 1rem;
   text-align: center;
@@ -69,21 +76,21 @@ input {
   margin: 5px 0;
 }
 
-button,
+#submit-btn,
 .logout,
 .upload {
   width: 100%;
-  padding: 12px 0;
+  padding: 0.8rem 0;
   background-color: #3498db;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.2rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-button:hover {
+#submit-btn:hover {
   background-color: #2185d0;
 }
 
