@@ -48,10 +48,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # local Apps
-    'accounts.apps.AccountsConfig',
-    'results.apps.ResultsConfig',
-    'user_auth.apps.UserAuthConfig',
-    'dashboard.apps.DashboardConfig',
+    'accounts.apps.AccountsConfig',     # new account registration
+    'results.apps.ResultsConfig',       # results
+    'user_auth.apps.UserAuthConfig',    # User authentication
+    'dashboard.apps.DashboardConfig',   # User dashboard
+    'password.apps.PasswordConfig',     # password reset
     # 3rd party Apps
     'django_extensions',    # provides a debugging console on the error page
     'widget_tweaks',
