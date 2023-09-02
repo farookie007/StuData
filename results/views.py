@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from utils.utils import parse_result_html, calculate_gpa, get_semester_code, clean
@@ -8,7 +9,7 @@ from .models import Course, Semester, Session, SemesterResult, Level
 
 
 
-
+@login_required
 def upload_result_view(request):
     # if a POST request is sent
     if request.method == 'POST':
@@ -74,7 +75,7 @@ def upload_result_view(request):
                 fields=('gpa',),
             )
             messages.success(request, "Upload successful")
-            return redirect(reverse('dashboard:dashboard'))
+            return redirect(reverse('dashboard:refresh'))
         form = ResultUploadForm(request.POST, request.FILES)
     # otherwise;
     else:
