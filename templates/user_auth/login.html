@@ -22,7 +22,7 @@
         {% endfor %}
     </div>
     <div class="form-group">
-        <label for="password">Password:</label><a href="{% url 'password_reset' %}" class="foot"
+        <label for="password">Password:</label><a href="{% url 'password_reset' %}" class="small"
             id="fgt-password">Forgot Password?</a>
         <!-- <input type="password" name="password" id="password" required> -->
         {% render_field form.password name="password" id="password" type="password" %}
@@ -31,8 +31,8 @@
         {% endfor %}
     </div>
 
-    <input type="submit" value="Login" id="submit-btn">
-    <div class="foot">
+    <input type="submit" value="Login" id="submit-btn" class="btn">
+    <div class="foot small">
         <p>Don't have an account? <a href="{% url 'accounts:register' %}">Register</a></p>
     </div>
 </form>

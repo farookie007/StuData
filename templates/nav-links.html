@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+<li><a href="{% url 'user_auth:logout' %}"><button id="login" class="auth-btn btn">Logout</button></a></li>
+<li><a href="{% url 'results:upload' %}"><button id="signup" class="auth-btn btn">Upload</button></a></li>
+{% else %}
+<li><a href="{% url 'user_auth:login' %}"><button id="login" class="auth-btn btn">Login</button></a></li>
+<li><a href="{% url 'accounts:register' %}"><button id="signup" class="auth-btn btn">Sign
+            Up</button></a>
+</li>
+{% endif %}

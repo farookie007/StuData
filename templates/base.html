@@ -6,25 +6,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    {% block head %}{% endblock head %}
+    <title>
+        StuData
+        {% if title %}
+        - {{ title }}
+        {% endif %}
+    </title>
 </head>
 
 <body>
-    <div class="container">
-        {% if messages %}
-        {% for message in messages %}
-        <p class="alert alert-{{ message.tags }}" id="flash-msg">{{ message }}</p>
-        {% endfor %}
-        {% endif %}
+    <div id="mobile-nav" class="overlay">
+        <!-- Overlay content -->
+        {% include 'nav-links.html' %}
+    </div>
 
-        {% block content %}{% endblock content %}
+    <div id="wrapper">
+        <header>
+            <div id="header-top" class="flex">
+                <li>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard:dashboard' %}" id="logo">Dashboard</a>
+                    {% else %}
+                    <a href="{% url 'user_auth:login' %}" id="logo">StuData</a>
+                    {% endif %}
+
+                </li>
+                <ul id="auth" class="flex desktop">
+                    {% include 'nav-links.html' %}
+                </ul>
+                <div class="hamburger-menu">
+                    <div class="ham-bar bar-top"></div>
+                    <div class="ham-bar bar-mid"></div>
+                    <div class="ham-bar bar-bottom"></div>
+                </div>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <p class="alert alert-{{ message.tags }}" id="flash-msg">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+
+
+            {% block header_bottom %}{% endblock header_bottom %}
+        </header>
+        <div class="container">
+            {% if messages %}
+            {% for message in messages %}
+            <p class="alert alert-{{ message.tags }}" id="flash-msg">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock content %}
+        </div>
+        <!-- {% if user.is_authenticated %}
+        <div class="logout">
+            <a href="{% url 'user_auth:logout' %}">Logout</a>
+        </div>
+        {% endif %} -->
     </div>
-    {% if user.is_authenticated %}
-    <div class="logout">
-        <a href="{% url 'user_auth:logout' %}">Logout</a>
-    </div>
-    {% endif %}
+
+    <script src="{% static 'js/base.js' %}"></script>
+    {% block script %}{% endblock script %}
 </body>
 
 </html>
