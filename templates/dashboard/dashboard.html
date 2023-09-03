@@ -8,8 +8,8 @@
 {% block content %}
 <div id="bio-data">
     <div id="hide">
-        <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye no-show">
-        <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye">
+        <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye">
+        <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye no-show">
     </div>
     <div class="name">
         <span class="surname">{{ user.last_name|upper }},</span><br>
@@ -18,8 +18,15 @@
     <div id="cred" class="flex">
         <p id="matric">{{ user.matric }}</p>
         <div id="cgpa">
-            <p>{{ user.cgpa|floatformat:2 }}</p>
-            <p class="no-show">****</p>
+            <a href="{% url 'dashboard:refresh' %}" class="no-show">
+                <img src="{% static 'images/icons/refresh-cw-svgrepo-com.svg' %}" alt="" class="eye">
+            </a>
+            <p class="no-show">
+                {{ user.cgpa|floatformat:2 }}
+            </p>
+            <p>
+                ****
+            </p>
         </div>
     </div>
 </div>

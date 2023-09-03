@@ -29,8 +29,8 @@
         <div class="pw-inpt">
             {% render_field form.password name="password" id="password" type="password" %}
             <a href="#" class="hide-pwd">
-                <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye">
-                <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye no-show">
+                <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye no-show">
+                <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye">
             </a>
         </div>
         {% for error in form.password.errors %}

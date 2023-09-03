@@ -7,22 +7,20 @@
   --greyy: hsla(0, 0%, 50%, 1);
   --white: #fff;
   --font-color: #333;
+  --font-fam: "Quicksand", Calibri;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  /* border: 1px dotted red; */
-}
-
-html {
-  font-family: "Quicksand", Calibri;
-  font-size: 16px;
 }
 
 /* native tags styling */
+html {
+  font-family: var(--font-fam);
+  font-size: 16px;
+}
 
 body {
   background-color: var(--bg-color);
@@ -54,9 +52,21 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+#cgpa {
+  display: flex;
+}
+#cgpa a img {
+  margin-right: 0.5rem;
+  transition: transform 2s;
+}
+#cgpa a img:active {
+  transform: rotateZ(720deg);
+}
 .pw-inpt {
   position: relative;
 }
+
 .hide-pwd {
   position: absolute;
   right: 3.5%;
@@ -64,11 +74,13 @@ input {
   transform: translateY(-50%);
   z-index: 111;
 }
+
 .eye {
   height: 1.2rem;
   width: auto;
   opacity: 0.7;
 }
+
 .no-show {
   display: none;
 }
@@ -92,19 +104,23 @@ a {
 #fgt-password {
   float: right;
 }
+
 /* student's bio data */
 #bio-data {
   position: relative;
 }
+
 #cred {
   color: var(--regular-blue);
   font-weight: 600;
 }
+
 #hide {
   position: absolute;
   top: 0;
   right: 0;
 }
+
 .flex {
   display: flex;
   justify-content: space-between;
@@ -120,7 +136,6 @@ a {
 .overlay {
   display: none;
 }
-
 
 .form-group {
   margin: 5px 0;
@@ -148,7 +163,7 @@ a {
   color: var(--white);
   border: none;
   transition: background-color 0.3s;
-  font-family: "Source Code Pro", Calibri;
+  font-family: var(--font-fam);
   cursor: pointer;
 }
 
@@ -157,30 +172,37 @@ a {
 }
 
 /* messages alert */
+#flash-msg {
+  position: absolute;
+}
 .alert {
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1rem;
   color: black;
-  font-weight: 300;
+  font-weight: 500;
   width: 100%;
   text-align: center;
-  padding: 0.5rem;
-  border-radius: 4px;
+  padding: 0.3rem;
+  /* border-radius: 4px; */
 }
+
 .alert-success {
-  background-color: hsla(120, 73%, 75%, 0.4);
+  background-color: hsla(120, 97%, 74%, 0.4);
 }
+
 .alert-error {
-  background-color: hsla(351, 100%, 86%, 0.8);
+  background-color: hsla(352, 90%, 81%, 0.8);
 }
+
 .alert-warning {
-  background-color: rgb(255, 255, 208);
+  background-color: rgb(255, 255, 172);
 }
+
 .error-msg {
   color: hsla(0, 94%, 57%, 1);
   text-align: right;
   font-size: 0.7rem;
-  font-weight: 300;
+  font-weight: 500;
   font-style: italic;
   margin-top: 0;
 }
@@ -193,6 +215,7 @@ li {
 
 header {
   margin-bottom: 2rem;
+  position: relative;
 }
 
 #logo {
@@ -264,6 +287,7 @@ header {
     box-sizing: 0;
     /* border: 1px dotted red; */
   }
+
   html {
     font-size: 3.4vw; /* This will make the font-size to be 16px when the viewport width is 375px */
   }
@@ -276,8 +300,8 @@ header {
   .container {
     width: 90%;
   }
-  /* End of handling the hamburger menu */
 
+  /* End of handling the hamburger menu */
   #logo {
     margin: auto 0;
     font-size: 1.6rem;
@@ -291,6 +315,7 @@ header {
     line-height: 2.5rem;
     position: relative;
   }
+
   .small {
     font-size: 1rem;
   }
@@ -325,9 +350,11 @@ header {
     transition: transform 0.2s, opacity 0.1s, top 0.6s;
     z-index: 111;
   }
+
   .bar-top {
     top: 30%;
   }
+
   .bar-mid {
     display: none;
   }
@@ -335,18 +362,21 @@ header {
   .bar-bottom {
     top: 70%;
   }
+
   .hamburger-menu.active .bar-top {
     transform: translate(-50%, -50%) rotate(-45deg);
     top: 50%;
   }
+
   .hamburger-menu.active .bar-mid {
     opacity: 0;
   }
+
   .hamburger-menu.active .bar-bottom {
     transform: translate(-50%, -50%) rotate(45deg);
     top: 50%;
   }
-  
+
   /* The Overlay (background) */
   .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */
@@ -363,6 +393,7 @@ header {
     overflow-y: hidden; /* Disable vertical scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
   }
+
   /* Position the content inside the overlay */
   .overlay-content {
     position: relative;
@@ -376,6 +407,7 @@ header {
   #auth {
     position: relative;
   }
+
   .auth-btn {
     transition: 0.3s; /* Transition effects on hover (color) */
     display: block; /* Display block instead of inline */
@@ -387,16 +419,18 @@ header {
     background-color: rgba(45, 45, 45, 1);
     font-size: 1rem;
   }
+
   .auth-btn:hover,
   .auth-btn:active {
     background-color: #2185d0;
-    /* background-color: rgb(80, 80, 80); */
+    background-color: rgb(80, 80, 80);
     transition: background-color 0.3s;
   }
 
   #login {
     top: 12vh;
   }
+
   #signup {
     top: 15vh;
   }

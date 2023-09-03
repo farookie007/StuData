@@ -52,11 +52,6 @@
             {% block header_bottom %}{% endblock header_bottom %}
         </header>
         <div class="container">
-            {% if messages %}
-            {% for message in messages %}
-            <p class="alert alert-{{ message.tags }}" id="flash-msg">{{ message }}</p>
-            {% endfor %}
-            {% endif %}
 
             {% block content %}{% endblock content %}
         </div>
