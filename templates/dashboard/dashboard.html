@@ -7,14 +7,20 @@
 
 {% block content %}
 <div id="bio-data">
-    <div id="hide">O</div>
+    <div id="hide">
+        <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye no-show">
+        <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye">
+    </div>
     <div class="name">
         <span class="surname">{{ user.last_name|upper }},</span><br>
         {{ user.first_name }} {{ user.middle_name }}
     </div>
     <div id="cred" class="flex">
         <p id="matric">{{ user.matric }}</p>
-        <p id="cgpa">{{ user.cgpa|floatformat:2 }}</p>
+        <div id="cgpa">
+            <p>{{ user.cgpa|floatformat:2 }}</p>
+            <p class="no-show">****</p>
+        </div>
     </div>
 </div>
 {% endblock content %}

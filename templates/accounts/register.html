@@ -10,6 +10,7 @@
 <h2>Registration Form</h2>
 <form method="post">
   {% csrf_token %}
+
   <div class="form-group">
     <label for="username">Matric Number:</label>
     <!-- <input type="text" name="username" id="username" required> -->
@@ -18,6 +19,7 @@
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
   </div>
+
   <div class="form-group">
     <label for="email">Email:</label>
     {% render_field form.email name="email" id="email" type="email" %}
@@ -25,6 +27,7 @@
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
   </div>
+
   <div class="form-group">
     <label for="first_name">First Name:</label>
     {% render_field form.first_name name="first_name" id="first_name" type="text" %}
@@ -32,6 +35,7 @@
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
   </div>
+
   <div class="form-group">
     <label for="last_name">Last Name:</label>
     {% render_field form.last_name name="last_name" id="last_name" type="text" %}
@@ -39,6 +43,7 @@
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
   </div>
+
   <div class="form-group">
     <label for="middle_name">Middle Name:</label>
     {% render_field form.middle_name name="middle_name" id="middle_name" placeholder="(Optional)" type="text" %}
@@ -46,18 +51,32 @@
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
   </div>
+
   <div class="form-group">
     <label for="password">Password:</label>
     <!-- <input type="password" name="password" id="password" required> -->
-    {% render_field form.password1 name="password" id="password" type="password" %}
+    <div class="pw-inpt">
+      {% render_field form.password1 name="password" id="password" type="password" %}
+      <a href="#" class="hide-pwd">
+        <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye">
+        <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye no-show">
+      </a>
+    </div>
     {% for error in form.password1.errors %}
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
   </div>
+
   <div class="form-group">
     <label for="confirm-password">Password:</label>
     <!-- <input type="password" name="confirm-password" id="confirm-password" required> -->
-    {% render_field form.password2 name="confirm-password" id="confirm-password" type="password" %}
+    <div class="pw-inpt">
+      {% render_field form.password2 name="confirm-password" id="confirm-password" type="password" %}
+      <a href="#" class="hide-pwd">
+        <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye">
+        <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye no-show">
+      </a>
+    </div>
     {% for error in form.password2.errors %}
     <p class="error-msg">{{ error }}</p>
     {% endfor %}
