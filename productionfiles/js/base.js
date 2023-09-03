@@ -23,7 +23,7 @@ hamMenu.addEventListener('click', () => {
 alertMsgs.forEach((msg) => {
     setTimeout(() => {
         msg.style.display = "none";
-    }, 3000);
+    }, 5000);
     msg.addEventListener('click', () => {
         msg.style.display = "none";
     });
@@ -51,6 +51,8 @@ hide.addEventListener('click', () => {
 
     hideChildren[0].classList.toggle('no-show');
     hideChildren[1].classList.toggle('no-show');
+
     cgpaChildren[0].classList.toggle('no-show');
     cgpaChildren[1].classList.toggle('no-show');
+    cgpaChildren[2].classList.toggle('no-show');
 });
