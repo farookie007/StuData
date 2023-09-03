@@ -57,10 +57,10 @@
     <!-- <input type="password" name="password" id="password" required> -->
     <div class="pw-inpt">
       {% render_field form.password1 name="password" id="password" type="password" %}
-      <a href="#" class="hide-pwd">
+      <div class="hide-pwd">
         <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye no-show">
         <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye">
-      </a>
+      </div>
     </div>
     {% for error in form.password1.errors %}
     <p class="error-msg">{{ error }}</p>
@@ -72,10 +72,10 @@
     <!-- <input type="password" name="confirm-password" id="confirm-password" required> -->
     <div class="pw-inpt">
       {% render_field form.password2 name="confirm-password" id="confirm-password" type="password" %}
-      <a href="#" class="hide-pwd">
+      <div class="hide-pwd">
         <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye">
         <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye no-show">
-      </a>
+      </div>
     </div>
     {% for error in form.password2.errors %}
     <p class="error-msg">{{ error }}</p>
