@@ -36,7 +36,7 @@ class SemesterResult(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='results')
 
     def __str__(self):
-        return f'<{self.result_id}>'
+        return f'<SemesterResult: {self.result_id}|{self.gpa}>'
 
 
 class Course(models.Model):
