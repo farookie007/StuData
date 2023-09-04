@@ -1,16 +1,19 @@
 import re
 import pandas as pd
 
-from typing import Dict, Tuple
+from typing import Tuple
 
 
 
 
-def get_semester_code(df):
+def get_semester_code(obj, course_title=None):
     """Gets and return the semester of the result as an
-    integer from the dataframe."""
-    course = df.index[0]
-    course_title = df.loc[course]['title']
+    integer from either a dataframe object or the course code as a string."""
+    if isinstance(obj, pd.DataFrame):
+        course = obj.index[0]
+        course_title = obj.loc[course]['title']
+    elif isinstance(obj, str):  # i.e. if the `obj` is the course code from the form
+        course = obj
     if "SWEP" in course_title:
         return 3
     last_dgt = int(course[-1])
@@ -35,7 +38,7 @@ def parse_result_html(file) -> Tuple:
         }
     # the original names of the variables
     # matric, name, fac, dept, level = pd.read_html(file)[0][1]
-    _, _, fac, _, level = pd.read_html(file)[0][1]
+    _, _, fac, dept, level = pd.read_html(file)[0][1]
     
     # extracting the session id
     # decoding the `file` object which is an io.BytesIO object
@@ -55,33 +58,4 @@ def parse_result_html(file) -> Tuple:
             dtype='int8'
             )
 
-    return dfs[1:], session, level, fac
-
-
-def calculate_gpa(df: pd.DataFrame) -> float:
-    """Calculates the GPA of a semester result.
-    params:
-        df: pandas.DataFrame object
-    returns:
-        Returns the GPA as a floating point number."""
-    gradients = df['gradient']
-    units = df['unit']
-    try:
-        return sum(gradients) / sum(units)
-    except ZeroDivisionError:
-        return float(0)
-
-def calculate_cgpa(dfs):
-    return calculate_gpa(merge(dfs))
-
-
-def clean(df, result_id):
-    df = df.dropna()
-    if result_id.endswith("100E"):
-        # This handles the complications with Engineering and Technology 100L results where only GNS matters.
-        df = df.drop(labels=[title for title in df.index if not title.startswith('GNS')], axis=0)
-    return df
-
-
-def merge(dfs):
-    return pd.concat(dfs)
+    return dfs[1:], session, level, fac, dept
