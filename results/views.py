@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from utils.utils import parse_result_html, calculate_gpa, get_semester_code, clean
-from .forms import ResultUploadForm
+from .forms import ResultUploadForm, ManUploadResultForm
 from .models import Course, Semester, Session, SemesterResult, Level
 
 
@@ -81,3 +81,10 @@ def upload_result_view(request):
     else:
         form = ResultUploadForm()
     return render(request, 'results/upload.html', {'form': form})
+
+
+def manual_upload_view(request):
+    form = ManUploadResultForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return render(request, "results/man_upload.html", {'form': form})
