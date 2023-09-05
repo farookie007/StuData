@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div id="mobile-nav" class="overlay">
+    <div id="mobile-nav" class="overlay mobile">
         <!-- Overlay content -->
         {% include 'base/includes/nav-links.html' %}
     </div>
@@ -51,8 +51,7 @@
 
             {% block header_bottom %}{% endblock header_bottom %}
         </header>
-        <div class="container">
-
+        <div>
             {% block content %}{% endblock content %}
         </div>
         <!-- {% if user.is_authenticated %}
