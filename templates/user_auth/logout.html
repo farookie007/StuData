@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 
 {% load widget_tweaks %}
 
@@ -10,9 +10,11 @@
 
 {% block content %}
 
-<h2>Logged out successfully</h2>
-<div class="foot small">
-    <p><a href="{% url 'user_auth:login' %}">Login</a></p>
+<div class="container">
+    <h2>Logged out successfully</h2>
+    <div class="foot small">
+        <p><a href="{% url 'user_auth:login' %}">Login</a></p>
+    </div>
 </div>
 
 {% endblock content %}

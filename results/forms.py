@@ -1,5 +1,14 @@
 from django import forms
 
+from .models import Course
+
+
+
+class ManUploadResultForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = '__all__'
+
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True

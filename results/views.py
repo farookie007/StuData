@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from utils.utils import parse_result_html, calculate_gpa, get_semester_code, clean
-from .forms import ResultUploadForm
+from utils.utils import parse_result_html, get_semester_code
+from .forms import ResultUploadForm, ManUploadResultForm
 from .models import Course, Semester, Session, SemesterResult, Level
 
 
@@ -22,8 +22,10 @@ def upload_result_view(request):
             SEMESTERRESULT_LIST = list()
 
             for file in uploaded_results:
-                dfs, session_code, level_code, fac = parse_result_html(file.file)
-                # create a new `Session` if it doesn't exist already
+                dfs, session_code, level_code, fac, dept = parse_result_html(file.file)
+                # update the user bio-data
+                user.faculty, user.department = fac, dept
+                # create a new `Session` if it doesn't exist 
                 session = Session.objects.get_or_create(code=session_code)[0]
                 level = Level.objects.get_or_create(code=level_code)[0]
 
@@ -41,7 +43,6 @@ def upload_result_view(request):
                         session=session,
                         owner=user,
                     )[0]
-                    result.gpa = calculate_gpa(clean(df, result_id))
                     SEMESTERRESULT_LIST.append(result)
 
                     for course_code in df.index:
@@ -74,6 +75,8 @@ def upload_result_view(request):
                 batch_size=500,
                 fields=('gpa',),
             )
+            # saving the user
+            user.save()
             messages.success(request, "Upload successful")
             return redirect(reverse('dashboard:refresh'))
         form = ResultUploadForm(request.POST, request.FILES)
@@ -81,3 +84,10 @@ def upload_result_view(request):
     else:
         form = ResultUploadForm()
     return render(request, 'results/upload.html', {'form': form})
+
+
+def manual_upload_view(request):
+    form = ManUploadResultForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return render(request, "results/man_upload.html", {'form': form})

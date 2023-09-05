@@ -18,9 +18,9 @@
 </head>
 
 <body>
-    <div id="mobile-nav" class="overlay">
+    <div id="mobile-nav" class="overlay mobile">
         <!-- Overlay content -->
-        {% include 'nav-links.html' %}
+        {% include 'base/includes/nav-links.html' %}
     </div>
 
     <div id="wrapper">
@@ -35,7 +35,7 @@
 
                 </li>
                 <ul id="auth" class="flex desktop">
-                    {% include 'nav-links.html' %}
+                    {% include 'base/includes/nav-links.html' %}
                 </ul>
                 <div class="hamburger-menu">
                     <div class="ham-bar bar-top"></div>
@@ -51,8 +51,7 @@
 
             {% block header_bottom %}{% endblock header_bottom %}
         </header>
-        <div class="container">
-
+        <div>
             {% block content %}{% endblock content %}
         </div>
         <!-- {% if user.is_authenticated %}

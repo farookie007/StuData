@@ -1,33 +1,49 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 
 {% block title %}Dashboard{% endblock title %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock head %}
+
 
 {% block content %}
-<div id="bio-data">
-    <div id="hide">
-        <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye">
-        <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye no-show">
-    </div>
-    <div class="name">
-        <span class="surname">{{ user.last_name|upper }},</span><br>
-        {{ user.first_name }} {{ user.middle_name }}
-    </div>
-    <div id="cred" class="flex">
-        <p id="matric">{{ user.matric }}</p>
-        <div id="cgpa">
-            <a href="{% url 'dashboard:refresh' %}" class="no-show">
-                <img src="{% static 'images/icons/refresh-cw-svgrepo-com.svg' %}" alt="" class="eye">
-            </a>
-            <p class="no-show">
-                {{ user.cgpa|floatformat:2 }}
-            </p>
-            <p>
-                ****
-            </p>
+<div class="container">
+    <div id="bio-data">
+        <div id="hide">
+            <img src="{% static 'images/icons/eye-svgrepo-com.svg' %}" alt="" class="eye">
+            <img src="{% static 'images/icons/eye-slash-svgrepo-com.svg' %}" alt="" class="eye no-show">
+        </div>
+        <div class="name">
+            <span class="surname">{{ user.last_name|upper }},</span><br>
+            {{ user.first_name }} {{ user.middle_name }}
+        </div>
+        <div id="cred" class="flex">
+            <p id="matric">{{ user.matric }}</p>
+            <div id="cgpa">
+                <a href="{% url 'dashboard:refresh' %}" class="no-show">
+                    <img src="{% static 'images/icons/refresh-cw-svgrepo-com.svg' %}" alt="" class="eye">
+                </a>
+                <p class="no-show">
+                    {{ user.cgpa|floatformat:2 }}
+                </p>
+                <p>
+                    ****
+                </p>
+            </div>
         </div>
     </div>
+
 </div>
+
+<main>
+    {% for result in user.results.all %}
+
+    <div class="results">
+        {% include 'results/includes/table.html' with result=result %}
+    </div>
+    {% endfor %}
+</main>
 {% endblock content %}
