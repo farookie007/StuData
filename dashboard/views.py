@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-
-from results.models import SemesterResult
+from results.models import SemesterResult, Course
 # Create your views here.
 
 
 @login_required
 def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
+
 
 @login_required
 def refresh(request):

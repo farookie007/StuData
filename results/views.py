@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic import UpdateView, DetailView
 
 from utils.utils import parse_result_html, get_semester_code
-from .forms import ResultUploadForm, ManUploadResultForm
+from .forms import ResultUploadForm
 from .models import Course, Semester, Session, SemesterResult, Level
 
 
@@ -86,8 +87,13 @@ def upload_result_view(request):
     return render(request, 'results/upload.html', {'form': form})
 
 
-def manual_upload_view(request):
-    form = ManUploadResultForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-    return render(request, "results/man_upload.html", {'form': form})
+class CourseUpdateView(UpdateView):
+    model = Course
+    template_name = 'results/course_update.html'
+    context_object_name = 'course'
+
+
+class CourseDetailView(DetailView):
+    model = Course
+    template_name = 'results/course_detail.html'
+    context_object_name = 'course'
