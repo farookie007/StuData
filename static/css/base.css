@@ -285,7 +285,7 @@ table {
 }
 
 thead {
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   background-color: var(--regular-blue);
   background-color: var(--light-blue);
@@ -489,5 +489,29 @@ main {
 
   #signup {
     top: 15vh;
+  }
+
+  /* result table */
+  table,
+  td,
+  thead {
+    font-size: 0.7rem;
+  }
+
+  thead {
+    position: sticky;
+  }
+
+
+  thead td,
+  table a {
+    padding: 0.1rem 0.2rem;
+  }
+
+  /* main */
+  main {
+    position: relative;
+    width: 95%;
+    margin: 2rem auto 0;
   }
 }
