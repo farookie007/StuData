@@ -47,7 +47,17 @@ class Course(models.Model):
     ca = models.FloatField(null=True)
     exam = models.FloatField(null=True)
     total = models.FloatField(null=True)
-    grade = models.CharField(max_length=10)      # Todo: Add different choices
+    grade = models.CharField(
+        max_length=10,
+        choices= (
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D'),
+        ('E', 'E'),
+        ('F', 'F'),
+        )
+    )      # Todo: Add different choices
     gradient = models.IntegerField()
     
     course_id = models.CharField(max_length=50, unique=True)
