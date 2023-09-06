@@ -24,14 +24,14 @@
 
     {% for course in result.courses.all %}
     <tr>
-        <td class="txt-center bold"><a href="">{{ course.code }}</a></td>
-        <td class=""><a href="" tabindex="-1">{{ course.title }}</a></td>
-        <td class="txt-center"><a href="" tabindex="-1">{{ course.unit }}</a></td>
-        <td class="txt-center"><a href="" tabindex="-1">{{ course.status }}</a></td>
-        <td class="txt-center"><a href="" tabindex="-1">{{ course.ca|default:"" }}</a></td>
-        <td class="txt-center"><a href="" tabindex="-1">{{ course.exam|default:"" }}</a></td>
-        <td class="txt-center"><a href="" tabindex="-1">{{ course.total|default:"" }}</a></td>
-        <td class="txt-center"><a href="" tabindex="-1">{{ course.grade }}</a></td>
+        <td class="txt-center bold"><a href="{% url 'results:course_detail' course.id %}">{{ course.code }}</a></td>
+        <td class=""><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.title }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.unit }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.status }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.ca|default:"" }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.exam|default:"" }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.total|default:"" }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.grade }}</a></td>
     </tr>
     {% endfor %}
 </table>
