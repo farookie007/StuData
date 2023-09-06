@@ -5,16 +5,16 @@
     <thead>
         <tr>
             <td colspan="8" id="long" class="txt-center">
-                <span class="f-left">Session: {{ result.session.code }}</span>
+                <span class="f-left"><span class="desktop">Session:</span>{{ result.session.code }}</span>
                 <span>{{ result.semester.code|get_sem_repr }} Semester|{{ result.result_id|get_level }} Level</span>
-                <span class="f-right">GPA: {{ result.gpa|floatformat:2 }}</span>
+                <span class="f-right"><span class="desktop">GPA:</span>{{ result.gpa|floatformat:2 }}</span>
             </td>
         </tr>
         <tr>
             <td class="txt-center">Code</td>
-            <td class="txt-center desktop">Title</td>
+            <td class="txt-center">Title</td>
             <td class="txt-center">Unit</td>
-            <td class="txt-center" class="desktop">Status</td>
+            <td class="txt-center">Status</td>
             <td class="txt-center">CA</td>
             <td class="txt-center">Exam</td>
             <td class="txt-center">Total</td>
@@ -25,9 +25,9 @@
     {% for course in result.courses.all %}
     <tr>
         <td class="txt-center bold"><a href="">{{ course.code }}</a></td>
-        <td class="desktop"><a href="" tabindex="-1">{{ course.title }}</a></td>
+        <td class=""><a href="" tabindex="-1">{{ course.title }}</a></td>
         <td class="txt-center"><a href="" tabindex="-1">{{ course.unit }}</a></td>
-        <td class="txt-center desktop"><a href="" tabindex="-1">{{ course.status }}</a></td>
+        <td class="txt-center"><a href="" tabindex="-1">{{ course.status }}</a></td>
         <td class="txt-center"><a href="" tabindex="-1">{{ course.ca|default:"" }}</a></td>
         <td class="txt-center"><a href="" tabindex="-1">{{ course.exam|default:"" }}</a></td>
         <td class="txt-center"><a href="" tabindex="-1">{{ course.total|default:"" }}</a></td>
