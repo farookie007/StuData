@@ -264,6 +264,14 @@ header {
   text-align: center;
 }
 
+.f-right {
+  float: right;
+}
+
+.f-left {
+  float: left;
+}
+
 .hamburger-menu {
   display: none;
 }
@@ -341,7 +349,6 @@ main {
     padding: 0;
     border: 0;
     box-sizing: 0;
-    /* border: 1px dotted red; */
   }
 
   html {
@@ -460,17 +467,11 @@ main {
   }
 
   /* The navigation links inside the overlay */
-  #auth {
-    position: relative;
-  }
-
   .auth-btn {
     transition: 0.3s; /* Transition effects on hover (color) */
     display: block; /* Display block instead of inline */
     color: #f0ebeb;
-    position: relative;
-    width: 80%;
-    margin: auto;
+    width: 100%;
     height: 3rem;
     background-color: rgba(45, 45, 45, 1);
     font-size: 1rem;
@@ -483,29 +484,39 @@ main {
     transition: background-color 0.3s;
   }
 
-  #login {
-    top: 12vh;
+  #mobile-nav ul {
+    position: relative;
+    top: 20%;
   }
-
-  #signup {
-    top: 15vh;
+  #mobile-nav ul li a {
+    display: block;
+    width: 80%;
+    margin: 2rem auto;
   }
 
   /* result table */
+  thead td,
+  table a {
+    padding: 0.1rem 0.2rem;
+  }
   table,
   td,
   thead {
     font-size: 0.7rem;
   }
-
-  thead {
-    position: sticky;
+  thead tr td {
+    border-top: 3px solid var(--font-color);
+    border-bottom: 3px solid var(--font-color);
   }
 
+  thead {
+    /* position: sticky; */
+    top: 0;
+  }
 
-  thead td,
-  table a {
-    padding: 0.1rem 0.2rem;
+  tr:active {
+    background: hsla(204, 70%, 53%, 0.2);
+    outline: none;
   }
 
   /* main */
