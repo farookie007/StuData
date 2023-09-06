@@ -31,16 +31,21 @@ def refresh(request):
     
         try:
             gradients, units = list(zip(*prev_courses))     # getting the gradient and units of the previous courses in a separate list
+            result.cgpa = sum(gradients) / sum(units)
+        except (ValueError, ZeroDivisionError):
+            # if `prev_courses` is empty i.e. none of the course passes validation
+            result.cpga = 0
+
+        try:
             c_gradients, c_units = list(zip(*curr_courses)) # getting the gradient and units of the current courses in a separate list
-        except ValueError:
-            # if `prev_courses` or `curr_courses` is empty i.e. none of the course passes validation
-            gradients = units = c_gradients = c_units = ()   # defaults to empty tuple
-        result.gpa = sum(c_gradients) / sum(c_units)
-        result.cgpa = sum(gradients) / sum(units)
+            result.gpa = sum(c_gradients) / sum(c_units)
+        except (ValueError, ZeroDivisionError):
+            # if `curr_courses` is empty i.e. none of the course passes validation
+            result.gpa = 0      # defaults to empty tuple
     
     try:
         user.cgpa = result.cgpa
-    except UnboundLocalError:   # i.e. `user_results` is empty thereby `result` variable is never defined
+    except UnboundLocalError:   # i.e. `user_results` is empty thereby `result` variable was never defined
         user.cgpa = 0.00    # reset the user result to 0.00
     user.save()
     SemesterResult.objects.bulk_update(user_results, fields=(
