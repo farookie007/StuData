@@ -35,6 +35,11 @@ class SemesterResult(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='results')
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='results')
 
+    class Meta:
+        ordering = [
+            "result_id",
+        ]
+
     def __str__(self):
         return f'<SemesterResult: {self.result_id}|{self.gpa}>'
 
@@ -65,6 +70,11 @@ class Course(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='courses')
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='courses')
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='courses')
+
+    class Meta:
+        ordering = [
+            "course_id",
+        ]
 
     def __str__(self):
         return f'<Course: {self.code} | {self.title}>'
