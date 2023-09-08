@@ -1,8 +1,12 @@
+from typing import Any, Optional
+from django.forms.models import BaseModelForm
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.views.generic import UpdateView, DetailView
+from django.views.generic import UpdateView, DetailView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .forms import ResultUploadForm
 from .models import Course, Semester, Session, SemesterResult, Level
@@ -88,13 +92,17 @@ def upload_result_view(request):
     return render(request, 'results/upload.html', {'form': form})
 
 
-class CourseDetailView(DetailView):
+class CourseDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = Course
     template_name = 'results/course_detail.html'
     context_object_name = 'course'
 
+    def test_func(self) -> bool | None:
+        """Allows only the owner of the course to perform operation"""
+        return self.request.user == self.get_object().owner
 
-class CourseUpdateView(UpdateView):
+
+class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Course
     template_name = 'results/course_update.html'
     context_object_name = 'course'
@@ -102,12 +110,41 @@ class CourseUpdateView(UpdateView):
     fields = (
         'ca',
         'exam',
-        'grade',
     )
 
-    def form_valid(self, form):
+    def test_func(self) -> bool | None:
+        """Allows only the owner of the course to perform operation"""
+        return self.request.user == self.get_object().owner
+    
+    @staticmethod
+    def get_grade(score, E_allowed=True):
+        """
+        Gets the corresponding grade of a particular `score`.
+        
+        params:
+            E_allowed :bool: represents whether grade 'E' is allowed for
+            the user. E.g. people admitted in session 2017/18 do not have
+            'E' grade.
+        returns:
+            grade: character representing the grade.
+        """
+        if score >= 70:
+            return 'A'
+        elif score >= 60:
+            return 'B'
+        elif score >= 50:
+            return 'C'
+        elif score >= 45:
+            return 'D'
+        elif score >= 40 and E_allowed:
+            return 'E'
+        else:
+            return 'F'
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
         course = form.save(commit=False)
         course.total = course.ca + course.exam
+        course.grade = self.get_grade(course.total, E_allowed=not(course.owner.matric.startswith('17/')))
         gradient = {
             'A': 5,
             'B': 4,
@@ -116,8 +153,23 @@ class CourseUpdateView(UpdateView):
             'E': 1,
             'F': 0,
         }.get(course.grade, None)
+
         if gradient is None:
             messages.error(self.request, "Invalid grade character")
             return self.form_invalid(form)
         course.gradient = gradient * course.unit
         return super().form_valid(form)
+
+
+class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Course
+    template_name = 'results/course_delete.html'
+    success_url = reverse_lazy('dashboard:dashboard')
+
+    def test_func(self) -> bool | None:
+        """Allows only the owner of the course to perform operation"""
+        return self.request.user == self.get_object().owner
+    
+    def delete(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        print("Delete view called")
+        return super().delete(request, *args, **kwargs)
