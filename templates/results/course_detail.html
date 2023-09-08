@@ -1,6 +1,47 @@
 {% extends 'base/base.html' %}
+{% load widget_tweaks %}
 
+
+{% block title %}Upload{% endblock title %}
 
 {% block content %}
-{{ course }}
+
+<div class="container">
+    <h2>{{ course.code }}</h2>
+    <h2>{{ course.title }}</h2>
+
+
+    <table id="per-course">
+        <tr>
+            <td>Unit</td>
+            <td>{{ course.unit }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>{{ course.status }}</td>
+        </tr>
+        <tr>
+            <td>CA</td>
+            <td>{{ course.ca }}</td>
+        </tr>
+        <tr>
+            <td>Exam</td>
+            <td>{{ course.exam }}</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>{{ course.total }}</td>
+        </tr>
+        <tr>
+            <td>Grade</td>
+            <td>{{ course.grade }}</td>
+        </tr>
+    </table>
+
+    <div class="flex space-around">
+        <a href="{% url 'results:course_edit' course.pk %}" class="anchor-btn btn">Edit</a>
+        <a href="{% url 'results:course_delete' course.pk %}" id="delete-btn" class="anchor-btn btn">Delete</a>
+    </div>
+
+</div>
 {% endblock content %}

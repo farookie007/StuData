@@ -1,16 +1,40 @@
 {% extends 'base/base.html' %}
 
-{{ course }}
+{% load widget_tweaks %}
+{% load static %}
+
+
+
+{% block title %}Update{% endblock title %}
+
+
+
 {% block content %}
+
 <div class="container">
+    <h2>Update Course</h2>
     <form method="post">
         {% csrf_token %}
+        <div class="form-group">
+            <label for="ca">CA Score:</label>
+            <!-- <input type="text" name="ca" id="ca" required> -->
+            {% render_field form.ca name="ca" id="ca" type="text" tabindex="1" %}
+            {% for error in form.ca.errors %}
+            <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="exam">Exam Score:</label>
+            <!-- <input type="text" name="exam" id="exam" required> -->
+            {% render_field form.exam name="exam" id="exam" type="text" tabindex="2" %}
+            {% for error in form.exam.errors %}
+            <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        </div>
+        
 
-        {{ form.as_p }}
-
-
-        <input type="submit" value="Submit">
+        <input type="submit" value="Update" id="submit-btn" class="btn" tabindex="3">
     </form>
+
 </div>
 {% endblock content %}
-    

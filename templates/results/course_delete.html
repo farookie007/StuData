@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+
+{% block title %}Delete{% endblock title %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <h2>Delete {{ course.code }}</h2>
+    <div class="del form-group">
+        <form method="post">
+            {% csrf_token %}
+
+            <p class="txt-center">Are you sure you want to delete {{ course.code }}?</p>
+
+            <input type="submit" value="Delete" id="delete-btn" class="btn" tabindex="1">
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -11,9 +11,9 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <label for="files">Add Files:</label>
             <!-- <input type="password" name="password" id="password" required> -->
-            {% render_field form.file name="file" id="file" type="file" %}
+            <label for="files">Add Files:</label>
+            {% render_field form.file name="file" id="file" type="file" class="file_sbmt" %}
             {% for error in form.file.errors %}
             <p class="error-msg">{{ error }}</p>
             {% endfor %}
