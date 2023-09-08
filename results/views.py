@@ -1,6 +1,3 @@
-from typing import Any, Optional
-from django.forms.models import BaseModelForm
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -97,7 +94,7 @@ class CourseDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     template_name = 'results/course_detail.html'
     context_object_name = 'course'
 
-    def test_func(self) -> bool | None:
+    def test_func(self):
         """Allows only the owner of the course to perform operation"""
         return self.request.user == self.get_object().owner
 
@@ -112,7 +109,7 @@ class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         'exam',
     )
 
-    def test_func(self) -> bool | None:
+    def test_func(self):
         """Allows only the owner of the course to perform operation"""
         return self.request.user == self.get_object().owner
     
@@ -141,7 +138,7 @@ class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         else:
             return 'F'
 
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+    def form_valid(self, form):
         course = form.save(commit=False)
         course.total = course.ca + course.exam
         course.grade = self.get_grade(course.total, E_allowed=not(course.owner.matric.startswith('17/')))
@@ -166,10 +163,10 @@ class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'results/course_delete.html'
     success_url = reverse_lazy('dashboard:dashboard')
 
-    def test_func(self) -> bool | None:
+    def test_func(self):
         """Allows only the owner of the course to perform operation"""
         return self.request.user == self.get_object().owner
     
-    def delete(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    def delete(self, request, *args, **kwargs):
         print("Delete view called")
         return super().delete(request, *args, **kwargs)
