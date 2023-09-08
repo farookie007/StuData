@@ -28,9 +28,9 @@
         <td class=""><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.title }}</a></td>
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.unit }}</a></td>
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.status }}</a></td>
-        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.ca|default:"" }}</a></td>
-        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.exam|default:"" }}</a></td>
-        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.total|default:"" }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.ca|resolve_nan:"" }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.exam|resolve_nan:"" }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.total|resolve_nan:"" }}</a></td>
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.grade }}</a></td>
     </tr>
     {% endfor %}

@@ -1,3 +1,4 @@
+import numpy as np
 from django import template
 
 
@@ -18,3 +19,8 @@ def get_sem_repr(code):
         '2': 'Second',
         '3': 'Third',
     }.get(code)
+
+@register.filter
+def resolve_nan(field, replace):
+    """Replaces `nan` in the fields with `replace` string."""
+    return replace if ((field == 'C') or (field is None)) else field
