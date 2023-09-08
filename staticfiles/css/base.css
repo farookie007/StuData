@@ -57,13 +57,16 @@ input {
 #cgpa {
   display: flex;
 }
+
 #cgpa a img {
   margin-right: 0.5rem;
   transition: transform 2s;
 }
+
 #cgpa a img:active {
   transform: rotateZ(720deg);
 }
+
 .pw-inpt {
   position: relative;
 }
@@ -172,6 +175,25 @@ a {
   background-color: #2185d0;
 }
 
+.anchor-btn {
+  display: inline-block;
+  height: unset;
+  width: 8rem;
+  padding: 10px;
+  text-align: center;
+}
+#delete-btn {
+  background-color: rgb(255, 38, 38);
+  transition: background-color 0.3s;
+}
+
+#delete-btn:hover {
+  background-color: rgb(222, 21, 21);
+}
+.del #delete-btn {
+  margin-top: 1rem;
+}
+
 /* messages alert */
 #flash-msg {
   position: absolute;
@@ -264,6 +286,9 @@ header {
 .txt-center {
   text-align: center;
 }
+.txt-left {
+  text-align: left;
+}
 
 .f-right {
   float: right;
@@ -275,6 +300,30 @@ header {
 
 .hamburger-menu {
   display: none;
+}
+.space-around {
+  justify-content: space-around;
+}
+
+/* course table */
+#per-course,
+#per-course td {
+  padding: 15px 0;
+  width: 50%;
+  border: 1px solid var(--light-blue);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+#per-course {
+  width: 90%;
+  margin: 3rem auto;
+  border-radius: 10px;
+}
+#per-course td:first-of-type {
+  text-align: left;
+}
+#per-course td:last-of-type {
+  text-align: right;
 }
 
 /* result table */
