@@ -23,4 +23,4 @@ def get_sem_repr(code):
 @register.filter
 def resolve_nan(field, replace):
     """Replaces `nan` in the fields with `replace` string."""
-    return replace if ((field == 'C') or (field is None)) else field
+    return replace if ((str(field) == 'nan') or (field is None)) else field

@@ -31,7 +31,7 @@
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.ca|resolve_nan:"" }}</a></td>
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.exam|resolve_nan:"" }}</a></td>
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.total|resolve_nan:"" }}</a></td>
-        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.grade }}</a></td>
+        <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.grade|resolve_nan:"" }}</a></td>
     </tr>
     {% endfor %}
 </table>
