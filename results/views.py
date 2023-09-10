@@ -96,7 +96,7 @@ class CourseDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
     def test_func(self):
         """Allows only the owner of the course to perform operation"""
-        return self.request.user == self.get_object().owner
+        return (self.request.user == self.get_object().owner)
 
 
 class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -110,8 +110,10 @@ class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     )
 
     def test_func(self):
-        """Allows only the owner of the course to perform operation"""
-        return self.request.user == self.get_object().owner
+        """Allows only the owner of the course to perform operation
+        ...and also only if the course scores are null values."""
+        obj = self.get_object()
+        return (self.request.user == obj.owner) and ('nan' in [str(x) for x in [obj.ca, obj.exam, obj.total, obj.grade]])
     
     @staticmethod
     def get_grade(score, E_allowed=True):
