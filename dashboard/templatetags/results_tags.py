@@ -1,4 +1,3 @@
-import numpy as np
 from django import template
 
 
@@ -20,7 +19,14 @@ def get_sem_repr(code):
         '3': 'Third',
     }.get(code)
 
+
 @register.filter
 def resolve_nan(field, replace):
     """Replaces `nan` in the fields with `replace` string."""
     return replace if ((str(field) == 'nan') or (field is None)) else field
+
+
+@register.filter
+def show_if_editable(course):
+    """Adds the 'no-show' id attr to the element if it is editable."""
+    return 'no-show' if 'nan' not in [str(x) for x in [course.ca, course.exam, course.total, course.grade]] else ''
