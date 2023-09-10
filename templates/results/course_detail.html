@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load widget_tweaks %}
+{% load results_tags %}
 
 
 {% block title %}Upload{% endblock title %}
@@ -22,24 +23,24 @@
         </tr>
         <tr>
             <td>CA</td>
-            <td>{{ course.ca }}</td>
+            <td>{{ course.ca|resolve_nan:'-' }}</td>
         </tr>
         <tr>
             <td>Exam</td>
-            <td>{{ course.exam }}</td>
+            <td>{{ course.exam|resolve_nan:'-' }}</td>
         </tr>
         <tr>
             <td>Total</td>
-            <td>{{ course.total }}</td>
+            <td>{{ course.total|resolve_nan:'-' }}</td>
         </tr>
         <tr>
             <td>Grade</td>
-            <td>{{ course.grade }}</td>
+            <td>{{ course.grade|resolve_nan:'-' }}</td>
         </tr>
     </table>
 
-    <div class="flex space-around">
-        <a href="{% url 'results:course_edit' course.pk %}" class="anchor-btn btn">Edit</a>
+    <div class="flex space-around">    
+        <a href="{% url 'results:course_edit' course.pk %}" id="{{ course|show_if_editable }}" class="anchor-btn btn">Edit</a>
         <a href="{% url 'results:course_delete' course.pk %}" id="delete-btn" class="anchor-btn btn">Delete</a>
     </div>
 

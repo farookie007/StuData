@@ -34,4 +34,7 @@
         <td class="txt-center"><a href="{% url 'results:course_detail' course.id %}" tabindex="-1">{{ course.grade|resolve_nan:"" }}</a></td>
     </tr>
     {% endfor %}
+    <tr>
+        <td colspan="8" id="long" class="txt-center bold">CGPA: {{ result.cgpa|floatformat:2 }}</td>
+    </tr>
 </table>
