@@ -113,7 +113,7 @@ class CourseUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         """Allows only the owner of the course to perform operation
         ...and also only if the course scores are null values."""
         obj = self.get_object()
-        return (self.request.user == obj.owner) and ('nan' in [str(x) for x in [obj.ca, obj.exam, obj.total, obj.grade]])
+        return (self.request.user == obj.owner) # and ('nan' in [str(x) for x in [obj.ca, obj.exam, obj.total, obj.grade]])
     
     @staticmethod
     def get_grade(score, E_allowed=True):
