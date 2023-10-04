@@ -12,7 +12,7 @@
         {% csrf_token %}
         <div class="form-group">
             <!-- <input type="password" name="password" id="password" required> -->
-            <label for="files">Add Files:</label>
+            <label for="file">Add Files:</label>
             {% render_field form.file name="file" id="file" type="file" class="file_sbmt" %}
             {% for error in form.file.errors %}
             <p class="error-msg">{{ error }}</p>

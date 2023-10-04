@@ -168,7 +168,3 @@ class CourseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         """Allows only the owner of the course to perform operation"""
         return self.request.user == self.get_object().owner
-    
-    def delete(self, request, *args, **kwargs):
-        print("Delete view called")
-        return super().delete(request, *args, **kwargs)

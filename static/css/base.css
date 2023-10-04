@@ -168,6 +168,7 @@ a {
   border-radius: 4px;
   font-size: 1rem;
   height: 2.5rem;
+  line-height: 0;
   background-color: var(--regular-blue);
   color: var(--white);
   border: none;
