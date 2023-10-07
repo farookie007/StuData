@@ -1,5 +1,8 @@
 # StuData - University of Ilorin CGPA Calculator
 
+![StuData dashboard](studata1.png)
+<!-- ![StuData login page](studata.png) -->
+
 StuData is a web application built with Django for calculating the CGPA of students at the University of Ilorin, Nigeria. It allows users to register, log in, upload their result files, track their CGPA, and manage their results easily.
 
 ## Features
