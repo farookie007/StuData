@@ -1,4 +1,5 @@
 import re
+import json
 import pandas as pd
 
 from typing import Tuple
@@ -59,3 +60,31 @@ def parse_result_html(file) -> Tuple:
             )
 
     return dfs[1:], session, level, fac, dept
+
+
+def obj_to_dict(obj, fields):
+    """
+    Function for making a dictionary representation of an object `obj`'s fields
+    as a key-value pair.
+    Params:
+        obj: the object to be turned into dictionary
+        fields: List: the list of fields to be included in the dictionary
+    Return:
+        the dictionary
+    """
+    field_values = [obj.serializable_value(f) for f in fields]
+    return dict(zip(fields, field_values))
+
+def get_obj_fields(obj):
+    return [f.name for f in obj._meta.fields]
+
+
+def write_to_json(filename, payload, indent=4):
+    with open(filename + '.json', 'w') as fp:
+        json.dump(payload, fp, indent=indent)
+
+
+def jsonnify_model(model, preffered_fields, indent=4):
+    objects = model.objects.all()
+    payload = [obj_to_dict(obj, preffered_fields) for obj in objects]
+    write_to_json(model.__name__, payload, indent=indent)
