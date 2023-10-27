@@ -2,6 +2,15 @@ import re
 import json
 import pandas as pd
 
+from results.models import (
+    Level,
+    Semester,
+    Session,
+    SemesterResult,
+    Course,
+)
+from accounts.models import CustomUser as User
+
 from typing import Tuple
 
 
@@ -19,6 +28,7 @@ def get_semester_code(obj, course_title=None):
         return 3
     last_dgt = int(course[-1])
     return 2 if last_dgt % 2 == 0 else 1
+
 
 
 def parse_result_html(file) -> Tuple:
@@ -84,7 +94,30 @@ def write_to_json(filename, payload, indent=4):
         json.dump(payload, fp, indent=indent)
 
 
-def jsonnify_model(model, preffered_fields, indent=4):
+def jsonnify_model(model, preffered_fields=None, indent=4):
+    if preffered_fields is None:
+        preffered_fields = get_obj_fields(model)
     objects = model.objects.all()
     payload = [obj_to_dict(obj, preffered_fields) for obj in objects]
     write_to_json(model.__name__, payload, indent=indent)
+
+
+def get_payload(filename):
+    with open(filename + '.json', 'r') as fp:
+        payload = json.load(fp)
+    return payload
+
+
+def deserialize_ForeignKeys(payload):
+    obj_map = {
+        'level': Level,
+        'session': Session,
+        'result': SemesterResult,
+        'semester': Semester,
+        'course': Course,
+    }
+    for load in payload:
+        for k in load.keys():
+            obj = obj_map.get(k)
+            if obj is not None:
+                load[k] = obj.objects.filter(id=load[k]).first()
