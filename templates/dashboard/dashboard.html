@@ -22,10 +22,10 @@
         <div id="cred" class="flex">
             <p id="matric">{{ user.matric }}</p>
             <div id="cgpa">
-                <a href="{% url 'dashboard:refresh' %}" class="no-show">
+                <div id="refresh" class="no-show">
                     <img src="{% static 'images/icons/refresh-cw-svgrepo-com.svg' %}" alt="" class="eye">
-                </a>
-                <p class="no-show">
+                </div>
+                <p id="cgpa_value" class="no-show">
                     {{ user.cgpa|floatformat:2 }}
                 </p>
                 <p>
@@ -46,3 +46,25 @@
     {% endfor %}
 </main>
 {% endblock content %}
+{% block script %}
+var refreshBtn = document.querySelector("#refresh");
+var cgpaVal = document.querySelector("#cgpa_value);
+
+function ajaxCall() {
+    $.ajax({
+        url: "{% url 'dashboard:refresh' %}", 
+        type: "GET",
+        success: function (data) {
+            var cgpa = cgpaVal.innerHTML;
+            let new_cgpa = JSON.parse(data).cgpa;
+            cgpaVal.innnerHTML = new_cgpa;
+            },
+        error: function (error) {
+            cgpaVal.innerHTML = cgpa;
+            console.log(`Error ${error}`);
+            }
+        });
+    }
+
+refreshBtn.addEventListener("click", ajaxCall());
+{% endblock script %}
