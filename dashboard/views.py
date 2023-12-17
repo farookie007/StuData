@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -57,4 +58,4 @@ def refresh(request):
         'gpa',
     ))
 
-    return redirect(reverse('dashboard:dashboard'))
+    return JsonResponse({"cgpa": round(user.cgpa, 2)})
