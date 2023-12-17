@@ -58,12 +58,12 @@ input {
   display: flex;
 }
 
-#cgpa a img {
+#cgpa #refresh img {
   margin-right: 0.5rem;
   transition: transform 2s;
 }
 
-#cgpa a img:active {
+#cgpa #refresh img:active {
   transform: rotateZ(720deg);
 }
 
