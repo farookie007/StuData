@@ -47,6 +47,7 @@
 </main>
 {% endblock content %}
 {% block script %}
+<script>
 var refreshBtn = document.querySelector("#refresh");
 var cgpaVal = document.querySelector("#cgpa_value);
 
@@ -67,4 +68,5 @@ function ajaxCall() {
     }
 
 refreshBtn.addEventListener("click", ajaxCall());
+</script>
 {% endblock script %}
