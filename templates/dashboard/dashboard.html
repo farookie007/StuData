@@ -50,21 +50,23 @@
 <script>
 let refreshBtn = document.querySelector("#refresh");
 let cgpaVal = document.querySelector("#cgpa_value);
+let cgpa = cgpaVal.innerHTML;
+
 
 refreshBtn.addEventListener("click", () => {
-    $.ajax({
-        url: "{% url 'dashboard:refresh' %}", 
-        type: "GET",
-        success: function (data) {
+    fetch("{% url 'dashboard:refresh' %}", {
+            method: 'get'
+        })
+        .then(response => response.json())
+        .then(data => {
             let cgpa = cgpaVal.innerHTML;
             let new_cgpa = JSON.parse(data)["cgpa"];
             cgpaVal.innnerHTML = {{ new_cgpa|floatformat:2 }};
-            },
-        error: function (error) {
+        })
+        .catch(error => {
             cgpaVal.innerHTML = cgpa;
-            console.log(`Error ${error}`);
-            }
+            console.log(`Error ${error}`); 
         });
-    });
+});
 </script>
 {% endblock script %}
