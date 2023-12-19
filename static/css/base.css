@@ -60,7 +60,7 @@ input {
 
 #cgpa #refresh img {
   margin-right: 0.5rem;
-  transition: transform 2s;
+  transition: transform 4s;
 }
 
 #cgpa #refresh img:active {
