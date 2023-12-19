@@ -48,20 +48,20 @@
 {% endblock content %}
 {% block script %}
 <script>
-var refreshBtn = document.querySelector("#refresh");
-var cgpaVal = document.querySelector("#cgpa_value);
+let refreshBtn = document.querySelector("#refresh");
+let cgpaVal = document.querySelector("#cgpa_value);
 
 function ajaxCall() {
     $.ajax({
         url: "{% url 'dashboard:refresh' %}", 
         type: "GET",
         success: function (data) {
-            var cgpa = cgpaVal.innerHTML;
-            let new_cgpa = JSON.parse(data).cgpa;
-            cgpaVal.innnerHTML = new_cgpa;
+            let cgpa = cgpaVal.innerHTML;
+            let new_cgpa = JSON.parse(data)["cgpa"];
+            cgpaVal.innnerHTML = {{ new_cgpa|floatformat:2 }};
             },
         error: function (error) {
-            cgpaVal.innerHTML = cgpa;
+            cgpaVal.innerHTML = 0.0;
             console.log(`Error ${error}`);
             }
         });
