@@ -51,7 +51,7 @@
 let refreshBtn = document.querySelector("#refresh");
 let cgpaVal = document.querySelector("#cgpa_value);
 
-function ajaxCall() {
+refreshBtn.addEventListener("click", () => {
     $.ajax({
         url: "{% url 'dashboard:refresh' %}", 
         type: "GET",
@@ -61,12 +61,10 @@ function ajaxCall() {
             cgpaVal.innnerHTML = {{ new_cgpa|floatformat:2 }};
             },
         error: function (error) {
-            cgpaVal.innerHTML = 0.0;
+            cgpaVal.innerHTML = cgpa;
             console.log(`Error ${error}`);
             }
         });
-    }
-
-refreshBtn.addEventListener("click", ajaxCall());
+    });
 </script>
 {% endblock script %}
