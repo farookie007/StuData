@@ -1,5 +1,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
+@-webkit-keyframes move-down-fade-out {
+  0% {
+    transform: translate(-50%, 0px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  10% {
+    transform: translate(-50%, 10px);
+  }
+  70% {
+    transform: translate(-50%, 10px);
+    opacity: 1;
+  }
+  95% {
+    transform: translate(-50%, 10px);
+    opacity: 0;
+  }
+}
+
+@keyframes move-down-fade-out {
+  0% {
+    transform: translate(-50%, 0px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  10% {
+    transform: translate(-50%, 10px);
+  }
+  70% {
+    transform: translate(-50%, 10px);
+    opacity: 1;
+  }
+  95% {
+    transform: translate(-50%, 10px);
+    opacity: 0;
+  }
+}
+
+.move-down-fade-out {
+  -webkit-animation: move-down-fade-out 8s ease-in-out;
+  animation: move-down-fade-out 8s ease-in-out;
+}
+
 :root {
   --light-blue: hsl(207, 100%, 98%);
   --regular-blue: hsl(204, 70%, 53%);
