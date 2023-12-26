@@ -48,7 +48,7 @@
             </div>
             {% if messages %}
             {% for message in messages %}
-            <p class="alert alert-{{ message.tags }}" id="flash-msg">{{ message }}</p>
+            <p class="alert alert-{{ message.tags }} move-down-fade-out" id="flash-msg">{{ message }}</p>
             {% endfor %}
             {% endif %}
 
