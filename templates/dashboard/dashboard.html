@@ -50,7 +50,6 @@
 <script>
 let refreshBtn = document.querySelector("#refresh");
 let cgpaVal = document.querySelector("#cgpa_value);
-let cgpa = cgpaVal.innerHTML;
 
 
 refreshBtn.addEventListener("click", () => {
@@ -59,12 +58,12 @@ refreshBtn.addEventListener("click", () => {
         })
         .then(response => response.json())
         .then(data => {
-            let cgpa = cgpaVal.innerHTML;
+            let cgpa = cgpaVal.innerText;
             let new_cgpa = JSON.parse(data)["cgpa"];
-            cgpaVal.innnerHTML = {{ new_cgpa|floatformat:2 }};
+            cgpaVal.innnerText = Math.round(new_cgpa, 2);
         })
         .catch(error => {
-            cgpaVal.innerHTML = cgpa;
+            cgpaVal.innerText = cgpa;
             console.log(`Error ${error}`); 
         });
 });
