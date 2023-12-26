@@ -23,7 +23,7 @@ hamMenu.addEventListener('click', () => {
 alertMsgs.forEach((msg) => {
     setTimeout(() => {
         msg.style.display = "none";
-    }, 5000);
+    }, 7000);
     msg.addEventListener('click', () => {
         msg.style.display = "none";
     });
