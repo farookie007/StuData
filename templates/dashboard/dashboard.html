@@ -53,14 +53,13 @@ let cgpaVal = document.querySelector("#cgpa_value);
 
 
 refreshBtn.addEventListener("click", () => {
-    fetch("{% url 'dashboard:refresh' %}", {
+    let cgpa = cgpaVal.innerText;
+    fetch(window.location.hostname + "{% url 'dashboard:refresh' %}", {
             method: 'get'
         })
         .then(response => response.json())
         .then(data => {
-            let cgpa = cgpaVal.innerText;
-            let new_cgpa = JSON.parse(data)["cgpa"];
-            cgpaVal.innnerText = Math.round(new_cgpa, 2);
+            cgpaVal.innnerText = Math.round(JSON.parse(data)["cgpa"], 2);
         })
         .catch(error => {
             cgpaVal.innerText = cgpa;
