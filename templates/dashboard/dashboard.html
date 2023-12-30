@@ -49,17 +49,20 @@
 {% block script %}
 <script>
 let refreshBtn = document.querySelector("#refresh");
-let cgpaVal = document.querySelector("#cgpa_value);
+let cgpaVal = document.querySelector("#cgpa_value");
 
 
 refreshBtn.addEventListener("click", () => {
+    let refreshUrl = "{% url 'dashboard:refresh' %}";
+    console.log("Refresh clicked!")
     let cgpa = cgpaVal.innerText;
-    fetch(window.location.hostname + "{% url 'dashboard:refresh' %}", {
-            method: 'get'
-        })
-        .then(response => response.json())
-        .then(data => {
-            cgpaVal.innnerText = Math.round(JSON.parse(data)["cgpa"], 2);
+    console.log(refreshUrl);
+    fetch(refreshUrl, {
+        method: 'get'
+    })
+    .then(response => response.json())
+    .then(data => {
+            cgpaVal.innnerText = data["cgpa"].toFixed(2);
         })
         .catch(error => {
             cgpaVal.innerText = cgpa;
