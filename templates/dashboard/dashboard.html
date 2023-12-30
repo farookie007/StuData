@@ -50,24 +50,21 @@
 <script>
 let refreshBtn = document.querySelector("#refresh");
 let cgpaVal = document.querySelector("#cgpa_value");
-
+var deg = 0;
 
 refreshBtn.addEventListener("click", () => {
-    let refreshUrl = "{% url 'dashboard:refresh' %}";
-    let cgpa = cgpaVal.innerText;
-    refreshBtn.querySelector("img").style.transform = "rotateZ(720deg)";
-    fetch(refreshUrl, {
+    deg += 720;
+    refreshBtn.querySelector("img").style.transform = `rotateZ(${deg}deg)`;
+    fetch("{% url 'dashboard:refresh' %}", {
         method: 'get'
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data.cgpa.toFixed(2));
             cgpaVal.innerText = data.cgpa.toFixed(2);
-        })
-        .catch(error => {
-            cgpaVal.innerText = cgpa;
-            console.log(`Error ${error}`); 
-        });
+    })
+    .catch(error => {
+        console.log(`Error ${error}`); 
+    });
 });
 </script>
 {% endblock script %}
