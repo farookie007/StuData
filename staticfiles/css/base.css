@@ -110,9 +110,6 @@ input {
   transition: transform 4s;
 }
 
-#cgpa #refresh img:active {
-  transform: rotateZ(720deg);
-}
 
 .pw-inpt {
   position: relative;
