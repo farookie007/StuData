@@ -81,7 +81,7 @@ def upload_result_view(request):
             # saving the user
             user.save()
             messages.success(request, "Upload successful")
-            return redirect(reverse('dashboard:refresh'))
+            return redirect(reverse('dashboard:dashboard'))
         form = ResultUploadForm(request.POST, request.FILES)
     # otherwise;
     else:
